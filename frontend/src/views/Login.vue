@@ -31,7 +31,11 @@ const login = async () => {
   error.value = ''
   try {
     await auth.login(email.value, password.value)
-    router.push('/dashboard')
+    if (auth.user?.role === 'admin') {
+      router.push('/admin/dashboard')
+    } else {
+      router.push('/dashboard')
+    }
   } catch (e) {
     error.value = e.response?.data?.message || 'Login failed'
   }
