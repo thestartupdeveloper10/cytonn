@@ -4,6 +4,9 @@ import Register from '../views/Register.vue'
 import { useAuthStore } from '../store/auth'
 import AdminLayout from '../views/admin/AdminLayout.vue'
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
+
+
+
 // Placeholder components for Users and Tasks
 const AdminUsers = () => import('../views/admin/Users.vue')
 const AdminTasks = () => import('../views/admin/Tasks.vue')

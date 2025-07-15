@@ -5,11 +5,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskController;
 
+//auth routes
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
-// Temporarily remove the closure middleware to fix artisan error
+//admin routes
 Route::middleware(['auth:sanctum', 'is.admin'])
     ->group(function () {
         Route::get('users', [UserController::class, 'index']);
@@ -29,7 +30,7 @@ Route::middleware(['auth:sanctum', 'is.admin'])->group(function () {
     Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
 });
 
-// User can view their tasks and update status
+// User tasks routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('my-tasks', [TaskController::class, 'index']); // user sees only their tasks
     Route::patch('tasks/{id}/status', [TaskController::class, 'updateStatus']);

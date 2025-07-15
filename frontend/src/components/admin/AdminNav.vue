@@ -31,7 +31,7 @@
 <script setup>
 import { useAuthStore } from '../../store/auth'
 import { useRouter } from 'vue-router'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps({
   show: { type: Boolean, default: false }
@@ -56,9 +56,7 @@ onMounted(() => {
 
 const onNavClick = () => {
   if (isMobile.value) {
-    // emit close event to parent
     window.setTimeout(() => {
-      // slight delay to allow navigation
       emit('close')
     }, 100)
   }
