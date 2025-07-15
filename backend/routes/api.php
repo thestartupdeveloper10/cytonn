@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum', 'is.admin'])
         Route::post('users', [UserController::class, 'store']);
         Route::put('users/{id}', [UserController::class, 'update']);
         Route::delete('users/{id}', [UserController::class, 'destroy']);
+        Route::get('admin/summary', [UserController::class, 'adminSummary']);
     });
 
 // Task management routes
@@ -32,4 +33,5 @@ Route::middleware(['auth:sanctum', 'is.admin'])->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('my-tasks', [TaskController::class, 'index']); // user sees only their tasks
     Route::patch('tasks/{id}/status', [TaskController::class, 'updateStatus']);
+    Route::get('user/summary', [UserController::class, 'summary']);
 }); 

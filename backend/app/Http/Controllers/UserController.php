@@ -68,4 +68,37 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'User deleted']);
     }
+
+    // User dashboard summary
+    public function summary(Request $request)
+    {
+        $user = $request->user();
+        $pending = $user->tasks()->where('status', 'pending')->count();
+        $inProgress = $user->tasks()->where('status', 'in_progress')->count();
+        $completed = $user->tasks()->where('status', 'completed')->count();
+        $users = \App\Models\User::count();
+        return response()->json([
+            'pending' => $pending,
+            'in_progress' => $inProgress,
+            'completed' => $completed,
+            'users' => $users,
+        ]);
+    }
+
+    // Admin dashboard summary
+    public function adminSummary()
+    {
+        $users = \App\Models\User::count();
+        $tasks = \App\Models\Task::count();
+        $pending = \App\Models\Task::where('status', 'pending')->count();
+        $inProgress = \App\Models\Task::where('status', 'in_progress')->count();
+        $completed = \App\Models\Task::where('status', 'completed')->count();
+        return response()->json([
+            'users' => $users,
+            'tasks' => $tasks,
+            'pending' => $pending,
+            'in_progress' => $inProgress,
+            'completed' => $completed,
+        ]);
+    }
 } 

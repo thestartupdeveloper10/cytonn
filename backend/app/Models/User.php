@@ -60,4 +60,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the tasks assigned to the user.
+     */
+    public function tasks()
+    {
+        return $this->hasMany(\App\Models\Task::class, 'assigned_to');
+    }
 }
